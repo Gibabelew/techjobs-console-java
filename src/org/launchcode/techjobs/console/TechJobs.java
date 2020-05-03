@@ -1,15 +1,19 @@
 package org.launchcode.techjobs.console;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
+import static org.launchcode.techjobs.console.JobData.findByValue;
 
 /**
  * Created by LaunchCode
  */
 public class TechJobs {
 
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     public static void main (String[] args) {
 
@@ -60,10 +64,20 @@ public class TechJobs {
                 System.out.println("\nSearch term: ");
                 String searchTerm = in.nextLine();
 
+                System.out.println("\n");
+                
+
+//                System.out.println("searchField:"+searchField);
+//                System.out.println("searchTerm:"+searchTerm);
+
+ //               printJobs (JobData.searchByColumnsAndValue(searchField,searchTerm));
+
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue ( searchTerm ));
+//                    System.out.println("Search all fields not yet implemented.");
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
+//                        printJobs(JobData.serachByColumnsAndValue(searchField,searchTerm));
                 }
             }
         }
@@ -109,8 +123,28 @@ public class TechJobs {
     }
 
     // Print a list of jobs
+//    private static void printJobsFirst(HashMap<String,String>job){
+//        for(String key:job.keySet()){
+//            System.out.println(key+" : "+ job.get(key));
+//       }
+//    }
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if (someJobs.size()>0){
 
-        System.out.println("printJobs is not implemented yet");
+            for(HashMap<String,String>job:someJobs){
+                System.out.println("*****");
+//                printJobsFirst(job);
+//                System.out.println("*****\n");
+                for(Map.Entry <String,String> allFields:job.entrySet ()){
+                    System.out.println (allFields.getKey () +":" + allFields.getValue ());
+                }
+
+        }
+
+        }else {
+            System.out.println("*******");
+            System.out.println("No job Found");}
+
+
     }
 }
